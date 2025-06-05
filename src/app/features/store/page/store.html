@@ -1,0 +1,9 @@
+@defer (when !isLoading()) {
+    <div class="grid grid-cols-5 h-full">
+        @for (item of paginateProducts(); track $index) {
+            <app-product [product]="item"></app-product>
+        }
+    </div>
+} @placeholder(minimum 500ms) {
+    <app-loading-spinner></app-loading-spinner>
+}

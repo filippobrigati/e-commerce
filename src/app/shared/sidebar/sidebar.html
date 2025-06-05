@@ -1,0 +1,71 @@
+<div class="p-4 sm:w-xs h-full flex flex-col justify-between gap-3">
+    <div class="flex flex-col gap-3">
+        <div>
+            <label for="search" class="block text-sm/6 font-medium text-gray-900">Search:</label>
+            <div class="mt-2">
+                <input type="text" name="search" id="search"
+                    class="block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6">
+            </div>
+        </div>
+
+        <div>
+            <label class="block text-sm font-medium text-gray-900">Price:</label>
+            <div class="mt-2 flex space-x-2">
+                <input type="number" placeholder="Min"
+                    class="w-1/2 rounded-md px-3 py-1.5 text-sm outline outline-1 outline-gray-300 focus:outline-2 focus:outline-indigo-600" />
+                <input type="number" placeholder="Max"
+                    class="w-1/2 rounded-md px-3 py-1.5 text-sm outline outline-1 outline-gray-300 focus:outline-2 focus:outline-indigo-600" />
+            </div>
+        </div>
+
+        <div>
+            <label for="rating" class="block text-sm/6 font-medium text-gray-900">Rating:</label>
+            <div class="mt-2 grid grid-cols-1">
+                <select id="rating" name="rating"
+                    class="col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-1.5 pr-8 pl-3 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                </select>
+                <svg class="pointer-events-none col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end text-gray-500 sm:size-4"
+                    viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" data-slot="icon">
+                    <path fill-rule="evenodd"
+                        d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z"
+                        clip-rule="evenodd" />
+                </svg>
+            </div>
+        </div>
+
+        <div>
+            <label for="price-sorting" class="block text-sm/6 font-medium text-gray-900">Price sorting:</label>
+            <div class="mt-2 grid grid-cols-1">
+                <select id="price-sorting" name="price-sorting"
+                    class="col-start-1 row-start-1 w-full appearance-none rounded-md bg-white py-1.5 pr-8 pl-3 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 focus:outline-2 focus:-outline-offset-2 focus:outline-indigo-600 sm:text-sm/6">
+                    <option value="">None</option>
+                    <option value="asc">Lowest price first</option>
+                    <option value="desc">Highest price first</option>
+                </select>
+                <svg class="pointer-events-none col-start-1 row-start-1 mr-2 size-5 self-center justify-self-end text-gray-500 sm:size-4"
+                    viewBox="0 0 16 16" fill="currentColor" aria-hidden="true" data-slot="icon">
+                    <path fill-rule="evenodd"
+                        d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z"
+                        clip-rule="evenodd" />
+                </svg>
+            </div>
+        </div>
+    </div>
+
+    <div class="rounded-md bg-blue-50 p-4">
+        <div class="flex">
+            <div class="ml-3 flex-1 md:flex md:justify-between">
+                <p class="text-sm text-blue-700 leading-6">
+                    This Angular app is just a demo, built on top of
+                    <a class="underline underline-offset-2" href="https://fakestoreapi.com/" target="_blank">fake store api</a>.
+                    You can find the code on GitHub.
+                </p>
+            </div>
+        </div>
+    </div>
+</div>
