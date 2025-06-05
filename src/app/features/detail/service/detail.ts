@@ -1,21 +1,21 @@
-import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Product } from '../../../core/model/database.types';
 import { environment } from '../../../../environments/environment';
+import { HttpClient } from '@angular/common/http';
 
 @Injectable({
   providedIn: 'root'
 })
-export class Store {
+export class Detail {
   private http = inject(HttpClient);
 
   /**
-   * Get all products from api
+   * Get single product by Id
    * 
-   * @returns Product array
+   * @param id product value id
    */
-  getProducts(): Observable<Product[]> {
-    return this.http.get<Product[]>(`${environment.apiURL}/products`);
+  getProductById(id: number): Observable<Product> {
+    return this.http.get<Product>(`${environment.apiURL}/products/${id}`);
   }
 }
