@@ -1,17 +1,23 @@
 import { Component, inject, signal } from '@angular/core';
 import { Detail as DetailService } from '../service/detail';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Product } from '../../../core/model/database.types';
+import { LucideAngularModule, ArrowLeft } from 'lucide-angular';
+import { LoadingSpinner } from '../../../shared/loading-spinner/loading-spinner';
+import { CurrencyPipe, NgClass } from '@angular/common';
+import { AddToCart } from '../components/add-to-cart/add-to-cart';
 
 @Component({
   selector: 'app-detail',
-  imports: [],
+  imports: [LoadingSpinner, RouterLink, NgClass, LucideAngularModule, CurrencyPipe, AddToCart],
   templateUrl: './detail.html',
   styleUrl: './detail.css'
 })
 export class Detail {
   private service = inject(DetailService);
   private route = inject(ActivatedRoute);
+
+  protected readonly BackIcon = ArrowLeft;
 
   productId = signal<number | null>(parseInt(this.route.snapshot.paramMap.get('id') ?? '') ?? null);
   color = signal<string | null>(this.route.snapshot.queryParamMap.get('color') ?? null);
@@ -25,6 +31,8 @@ export class Detail {
 
   private fetchProduct() {
     try {
+      this.isLoading.set(true);
+      
       const id = this.productId();
 
       if (!id) {

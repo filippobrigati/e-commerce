@@ -1,1 +1,28 @@
-<p>detail works!</p>
+<div class="w-full" [ngClass]="isLoading() ? 'h-full' : ''">
+    @defer (when !isLoading()) {
+    <div class="flex text-blue-500 cursor-pointer flex-row justify-start items-center border-b border-gray-200 py-2 px-4"
+        routerLink="/">
+        <i-lucide [img]="BackIcon" class="w-5 h-5"></i-lucide>
+        <span class="ps-1">Go back</span>
+    </div>
+    <div class="p-4 grid grid-cols-1 md:grid-cols-2 gap-3">
+        <div class="col-span-1">
+            <div class="w-full aspect-square" [class]="color()"></div>
+        </div>
+        <div class="col-span-1">
+            <p class="text-3xl font-semibold">
+                {{ product()?.title }}
+            </p>
+            <p class="py-8 text-gray-600">
+                {{ product()?.description }}
+            </p>
+            <p class="py-8 text-2xl monospace-text text-slate-500">
+                {{ product()?.price | currency }}
+            </p>
+            <app-add-to-cart></app-add-to-cart>
+        </div>
+    </div>
+    } @placeholder {
+    <app-loading-spinner></app-loading-spinner>
+    }
+</div>

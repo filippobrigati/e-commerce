@@ -4,3 +4,7 @@
 * {
     font-family: 'Inter', sans-serif;
 }
+
+.monospace-text {
+    font-family: 'Geist Mono' !important;
+}

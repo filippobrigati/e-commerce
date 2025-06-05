@@ -1,0 +1,16 @@
+<div class="w-full flex flex-row gap-3">
+    <div class="w-1/3 flex flex-row border border-gray-200">
+        <button class="bg-gray-50 p-2 cursor-pointer" [disabled]="quantity() < 1" (click)="dec()">
+            <i-lucide [img]="MinusIcon" class="h-8 w-8 text-gray-600"></i-lucide>
+        </button>
+        <div class="w-full flex justify-center items-center text-xl monospace-text">
+            {{ quantity() }}
+        </div>
+        <button class="bg-gray-50 p-2 cursor-pointer" [disabled]="quantity() > 9" (click)="inc()">
+            <i-lucide [img]="PlusIcon" class="h-8 w-8 text-gray-600"></i-lucide>
+        </button>
+    </div>
+    <button type="button" class="w-2/3 bg-blue-500 text-white px-4 py-3 cursor-pointer">
+        Add to cart
+    </button>
+</div>

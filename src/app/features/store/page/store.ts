@@ -19,7 +19,7 @@ export class Store {
   isLoading = signal<boolean>(true);
   currentPage = signal<number>(1);
   // Products array
-  private products = signal<Product[]>([]);
+  products = signal<Product[]>([]);
 
   totalPages = computed(() => 
     Math.ceil(this.products().length / this.PAGE_SIZE)
