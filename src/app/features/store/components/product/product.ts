@@ -1,9 +1,10 @@
 import { Component, computed, input } from '@angular/core';
 import { Product as ProductType } from '../../../../core/model/database.types';
+import { CurrencyPipe } from '@angular/common';
 
 @Component({
   selector: 'app-product',
-  imports: [],
+  imports: [CurrencyPipe],
   templateUrl: './product.html',
   styleUrl: './product.css'
 })
