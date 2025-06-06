@@ -72,9 +72,15 @@
             </div>
         </div>
         @if (isAuth()) {
-        <div class="cursor-pointer w-full border border-gray-200 p-2 flex flex-row hover:bg-gray-200">
-            <i-lucide [img]="UserIcon" class="w-5 h-5"></i-lucide>
-            <span class="ps-2">Profile</span>
+        <div class="flex flex-row gap-4 justify-center items-center">
+            <div class="cursor-pointer w-full border border-gray-200 p-2 flex flex-row hover:bg-gray-200">
+                <i-lucide [img]="UserIcon" class="w-5 h-5"></i-lucide>
+                <span class="ps-2">Profile</span>
+            </div>
+            <div class="h-full cursor-pointer border border-red-500 p-2 flex justify-center items-center hover:bg-red-500 text-red-500 hover:text-white"
+                (click)="logout()">
+                <i-lucide [img]="LogoutIcon" class="w-5 h-5"></i-lucide>
+            </div>
         </div>
         }
     </div>

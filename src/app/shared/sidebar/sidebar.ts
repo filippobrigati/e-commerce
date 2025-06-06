@@ -1,5 +1,5 @@
 import { Component, inject } from '@angular/core';
-import { LucideAngularModule, User } from 'lucide-angular';
+import { LucideAngularModule, User, LogOut } from 'lucide-angular';
 import { Auth as AuthService } from '../../core/service/auth';
 
 @Component({
@@ -10,9 +10,15 @@ import { Auth as AuthService } from '../../core/service/auth';
 })
 export class Sidebar {
   private readonly service = inject(AuthService);
+
   protected readonly UserIcon = User;
+  protected readonly LogoutIcon = LogOut;
 
   isAuth(): boolean {
     return this.service.isLoggedIn();
+  }
+
+  logout() {
+    this.service.logout();
   }
 }
