@@ -1,9 +1,10 @@
 <div class="w-full" [ngClass]="isLoading() ? 'h-full' : ''">
     @defer (when !isLoading()) {
-    <div class="flex text-blue-500 cursor-pointer flex-row justify-start items-center border-b border-gray-200 py-2 px-4"
-        routerLink="/">
-        <i-lucide [img]="BackIcon" class="w-5 h-5"></i-lucide>
-        <span class="ps-1">Go back</span>
+    <div class="flex flex-row justify-start items-center border-b border-gray-200 py-2 px-4">
+        <div class="flex flex-row text-blue-500 cursor-pointer" routerLink="/">
+            <i-lucide [img]="BackIcon" class="w-5 h-5"></i-lucide>
+            <span class="ps-1">Go back</span>
+        </div>
     </div>
     <div class="p-4 grid grid-cols-1 md:grid-cols-2 gap-3">
         <div class="col-span-1 flex justify-center items-center">
@@ -17,9 +18,11 @@
                 {{ product()?.description }}
             </p>
             <div class="py-4">
-                <span class="monospace-text"><span class="monospace-text" [ngClass]="rateColor()">{{ product()?.rating?.rate }}</span>/5</span> 
-                score with <span class="monospace-text" [ngClass]="reviewColor()">{{ product()?.rating?.count }}</span> 
-                review!</div>
+                <span class="monospace-text"><span class="monospace-text" [ngClass]="rateColor()">{{
+                        product()?.rating?.rate }}</span>/5</span>
+                score with <span class="monospace-text" [ngClass]="reviewColor()">{{ product()?.rating?.count }}</span>
+                review!
+            </div>
             <p class="py-8 text-2xl monospace-text text-slate-500">
                 {{ product()?.price | currency }}
             </p>

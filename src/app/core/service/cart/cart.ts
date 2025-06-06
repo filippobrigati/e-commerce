@@ -1,51 +1,85 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 import { Product } from '../../model/products';
+import { Cart as CartType } from '../../model/cart';
 
 @Injectable({
   providedIn: 'root'
 })
 export class Cart {
-  private cartSubject = new BehaviorSubject<Product[]>([]);
+  private cartSubject = new BehaviorSubject<CartType>({
+    amount: 0,
+    items: 0,
+    products: []
+  });
 
-  // Public observable to subscribe to cart changes
   cart$ = this.cartSubject.asObservable();
 
-  // Get current cart value
-  get(): Product[] {
+  // Internal helper to recalculate total items and amount
+  private recalculate(products: CartType['products']): CartType {
+    const items = products.reduce((sum, p) => sum + p.quantity, 0);
+    const amount = products.reduce((sum, p) => sum + p.quantity * p.product.price, 0);
+    return { items, amount, products };
+  }
+
+  get(): CartType {
     return this.cartSubject.getValue();
   }
 
-  // Set the entire cart (replaces all items)
-  set(products: Product[]): void {
-    this.cartSubject.next([...products]);
+  set(cart: CartType): void {
+    this.cartSubject.next(this.recalculate(cart.products));
   }
 
-  // Add a product to the cart
   add(product: Product): void {
-    const current = this.get();
-    this.cartSubject.next([...current, product]);
+    const cart = this.get();
+    const existing = cart.products.find(p => p.id === product.id);
+
+    let updatedProducts: CartType['products'];
+    if (existing) {
+      updatedProducts = cart.products.map(p =>
+        p.id === product.id ? { ...p, quantity: p.quantity + 1 } : p
+      );
+    } else {
+      updatedProducts = [...cart.products, { id: product.id, quantity: 1, product }];
+    }
+
+    this.cartSubject.next(this.recalculate(updatedProducts));
   }
 
-  // Remove a product from the cart by ID
+  decrement(productId: number): void {
+    const cart = this.get();
+    const existing = cart.products.find(p => p.id === productId);
+
+    if (!existing) return;
+
+    let updatedProducts: CartType['products'];
+
+    if (existing.quantity > 1) {
+      updatedProducts = cart.products.map(p =>
+        p.id === productId ? { ...p, quantity: p.quantity - 1 } : p
+      );
+    } else {
+      updatedProducts = cart.products.filter(p => p.id !== productId);
+    }
+
+    this.cartSubject.next(this.recalculate(updatedProducts));
+  }
+
   remove(productId: number): void {
-    const current = this.get();
-    const updated = current.filter(p => p.id !== productId);
-    this.cartSubject.next(updated);
+    const cart = this.get();
+    const updatedProducts = cart.products.filter(p => p.id !== productId);
+    this.cartSubject.next(this.recalculate(updatedProducts));
   }
 
-  // Clear the cart
   clear(): void {
-    this.cartSubject.next([]);
+    this.cartSubject.next({ amount: 0, items: 0, products: [] });
   }
 
-  // Check if a product is in the cart
   contains(productId: number): boolean {
-    return this.get().some(p => p.id === productId);
+    return this.get().products.some(p => p.id === productId);
   }
 
-  // Get total item count
-  count(): number {
-    return this.get().length;
+  getQuantity(productId: number): number {
+    return this.get().products.find(p => p.id === productId)?.quantity ?? 0;
   }
 }

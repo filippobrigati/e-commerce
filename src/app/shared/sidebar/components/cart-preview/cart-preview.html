@@ -3,4 +3,11 @@
         class="flex cursor-pointer flex-row justify-start items-center border-b border-gray-200 py-2 px-4 font-semibold">
         Your cart:
     </div>
+    @for (item of cart().products; track $index) {
+
+    } @empty {
+        <div class="w-full flex justify-center items-center">
+            <i-lucide [img]="EmptyIcon" class="h-8 w-8"></i-lucide>
+        </div>
+    }
 </div>
