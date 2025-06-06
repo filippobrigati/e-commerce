@@ -1,6 +1,6 @@
 <div class="h-full overflow-y-auto">
     @defer (when !isLoading()) {
-        <div class="grid grid-cols-2 lg:grid-cols-4 xl:grid-cols-5">
+        <div class="grid grid-cols-2 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-7">
             @for (item of products(); track $index) {
                 <app-product [product]="item"></app-product>
             }

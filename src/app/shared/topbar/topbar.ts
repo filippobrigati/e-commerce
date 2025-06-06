@@ -1,12 +1,13 @@
 import { Component } from '@angular/core';
-import { LucideAngularModule, User } from 'lucide-angular';
+import { RouterLink } from '@angular/router';
+import { LucideAngularModule, ShoppingCart } from 'lucide-angular';
 
 @Component({
   selector: 'app-topbar',
-  imports: [LucideAngularModule],
+  imports: [LucideAngularModule, RouterLink],
   templateUrl: './topbar.html',
   styleUrl: './topbar.css'
 })
 export class Topbar {
-  readonly UserIcon = User;
+  protected readonly CartIcon = ShoppingCart;
 }

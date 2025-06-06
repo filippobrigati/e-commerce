@@ -57,15 +57,23 @@
         </div>
     </div>
 
-    <div class="bg-blue-50 p-4">
-        <div class="flex">
-            <div class="ml-3 flex-1 md:flex md:justify-between">
-                <p class="text-sm text-blue-700 leading-6">
-                    This Angular app is just a demo, built on top of
-                    <a class="underline underline-offset-2" href="https://fakestoreapi.com/" target="_blank">fake store api</a>.
-                    You can find the code on GitHub.
-                </p>
+    <div class="flex flex-col gap-3">
+        <div class="bg-blue-50 p-4">
+            <div class="flex">
+                <div class="ml-3 flex-1 md:flex md:justify-between">
+                    <p class="text-sm text-blue-700 leading-6">
+                        This Angular app is just a demo, built on top of
+                        <a class="underline underline-offset-2" href="https://fakestoreapi.com/" target="_blank">fake
+                            store
+                            api</a>.
+                        You can find the code on GitHub.
+                    </p>
+                </div>
             </div>
+        </div>
+        <div class="cursor-pointer w-full border border-gray-200 p-2 flex flex-row hover:bg-gray-200">
+            <i-lucide [img]="UserIcon" class="w-5 h-5"></i-lucide>
+            <span class="ps-2">Profile</span>
         </div>
     </div>
 </div>
