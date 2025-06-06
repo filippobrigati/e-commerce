@@ -1,9 +1,8 @@
 import { Component, inject, signal } from '@angular/core';
 import { Store as StoreService } from '../service/store';
 import { LoadingSpinner } from '../../../shared/loading-spinner/loading-spinner';
-import { Product } from '../../../core/model/database.types';
+import { Product } from '../../../core/model/products';
 import { Product as ProductComponent } from '../components/product/product';
-import { Suggested as SuggestedService } from '../../../core/service/suggested/suggested';
 import { Router } from '@angular/router';
 
 @Component({
@@ -14,7 +13,6 @@ import { Router } from '@angular/router';
 })
 export class Store {
   private service = inject(StoreService);
-  private suggested = inject(SuggestedService);
   private router = inject(Router);
   // Loading state
   isLoading = signal<boolean>(true);
@@ -30,7 +28,15 @@ export class Store {
 
     this.service.getProducts().subscribe({
       next: (data) => {
-        this.products.set(data);
+        // Calculate color for each obj
+        const flag: Product[] = data.map((value: Product) => {
+          return {
+            ...value,
+            color: this.getColor(value.id)
+          };
+        });
+        this.products.set(flag);
+
         this.isLoading.set(false);
       },
       error: (err) => {
@@ -40,27 +46,30 @@ export class Store {
     });
   }
 
-  navigate(data: { id: number, color: string }): void {
-    const path: string = `details/${data.id.toString()}`;
-    const suggestedProducts: Product[] = this.getSuggestedProduct();
+  navigate(id: number): void {
+    const path: string = `details/${id.toString()}`;
 
-    // Save product in the shared service (and localStorage)
-    this.suggested.suggested = suggestedProducts;
     // Navigate to detailed page
-    this.router.navigate([path], {
-      queryParams: {
-        color: data.color
-      }
-    });
+    this.router.navigate([path]);
   }
 
-  private getSuggestedProduct(): Product[] {
-    const products = this.products();
-    if (products.length <= 3) {
-      return products;
-    }
+  private getColor(id: number): string {
+    const colors = [
+      'bg-green-50',
+      'bg-amber-50',
+      'bg-teal-50',
+      'bg-blue-50',
+      'bg-rose-50',
+      'bg-purple-50',
+      'bg-orange-50',
+      'bg-yellow-50',
+      'bg-lime-50',
+      'bg-cyan-50',
+      'bg-indigo-50',
+      'bg-fuchsia-50',
+    ];
 
-    const shuffled = [...products].sort(() => 0.5 - Math.random());
-    return shuffled.slice(0, 3);
+    const index = id % colors.length;
+    return colors[index];
   }
 }

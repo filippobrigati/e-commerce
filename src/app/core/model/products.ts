@@ -8,5 +8,6 @@ export type Product = {
     rating: {
         rate: number;
         count: number;
-    }
+    };
+    color: string;
 }

@@ -1,8 +1,8 @@
 <div class="col-span-1 h-auto border-b border-r border-gray-200 cursor-pointer"
-    (click)="navigate.emit({ id: product().id, color: color() })">
+    (click)="navigate.emit(product().id)">
     <div class="w-full h-full flex flex-col justify-between items-start p-4">
         <div class="w-full h-full">
-            <div class="w-full h-32" [class]="color()"></div>
+            <div class="w-full h-32" [class]="product().color"></div>
             <span class="pt-2 line-clamp-1">{{ product().title }}</span>
             <p class="pt-2 text-md monospace-text text-slate-500">
                 {{ product().price | currency }}

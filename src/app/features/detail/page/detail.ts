@@ -1,7 +1,7 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import { Detail as DetailService } from '../service/detail';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { Product } from '../../../core/model/database.types';
+import { Product } from '../../../core/model/products';
 import { LucideAngularModule, ArrowLeft } from 'lucide-angular';
 import { LoadingSpinner } from '../../../shared/loading-spinner/loading-spinner';
 import { CurrencyPipe, NgClass } from '@angular/common';
@@ -19,8 +19,7 @@ export class Detail {
 
   protected readonly BackIcon = ArrowLeft;
 
-  productId = signal<number | null>(parseInt(this.route.snapshot.paramMap.get('id') ?? '') ?? null);
-  color = signal<string | null>(this.route.snapshot.queryParamMap.get('color') ?? null);
+  productId = signal<number | null>(null);
 
   product = signal<Product | null>(null);
   isLoading = signal<boolean>(true);
@@ -40,7 +39,7 @@ export class Detail {
     }
   });
 
-    reviewColor = computed<string>(() => {
+  reviewColor = computed<string>(() => {
     const count: number | undefined = this.product()?.rating.count;
     if (!count) {
       return 'text-red-500';
@@ -56,21 +55,27 @@ export class Detail {
   });
 
   constructor() {
-    this.fetchProduct();
+    this.route.paramMap.subscribe(params => {
+      const id = parseInt(params.get('id') ?? '', 10);
+      if (!isNaN(id)) {
+        this.productId.set(id);
+        this.fetchProduct(id);
+      }
+    });
   }
 
-  private fetchProduct() {
+  private fetchProduct(id: number) {
     try {
       this.isLoading.set(true);
-      
-      const id = this.productId();
-      if (!id) {
-        throw new Error(`Missing ID on current route, or error getting it.`);
-      }
 
       this.service.getProductById(id).subscribe({
         next: (data) => {
-          this.product.set(data);
+          const flag: Product = {
+            ...data,
+            color: this.getColor(data.id)
+          }
+
+          this.product.set(flag);
           this.isLoading.set(false);
         },
         error: (err) => {
@@ -81,5 +86,25 @@ export class Detail {
     } catch (error) {
       console.error(error);
     }
+  }
+
+  private getColor(id: number): string {
+    const colors = [
+      'bg-green-50',
+      'bg-amber-50',
+      'bg-teal-50',
+      'bg-blue-50',
+      'bg-rose-50',
+      'bg-purple-50',
+      'bg-orange-50',
+      'bg-yellow-50',
+      'bg-lime-50',
+      'bg-cyan-50',
+      'bg-indigo-50',
+      'bg-fuchsia-50',
+    ];
+
+    const index = id % colors.length;
+    return colors[index];
   }
 }

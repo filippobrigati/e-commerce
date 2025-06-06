@@ -7,7 +7,7 @@
     </div>
     <div class="p-4 grid grid-cols-1 md:grid-cols-2 gap-3">
         <div class="col-span-1 flex justify-center items-center">
-            <div class="w-full max-w-[600px] max-h-[600px] aspect-square" [class]="color()"></div>
+            <div class="w-full max-w-[600px] max-h-[600px] aspect-square" [ngClass]="product()?.color"></div>
         </div>
         <div class="col-span-1">
             <p class="text-3xl font-semibold">
