@@ -1,6 +1,6 @@
 import { Component, inject, signal } from '@angular/core';
 import { LucideAngularModule, User, LogOut } from 'lucide-angular';
-import { Auth as AuthService } from '../../core/service/auth';
+import { Auth as AuthService } from '../../core/service/auth/auth';
 import { Router, Event, NavigationEnd, NavigationError } from '@angular/router';
 import { Filter } from './components/filter/filter';
 import { Suggestion } from './components/suggestion/suggestion';

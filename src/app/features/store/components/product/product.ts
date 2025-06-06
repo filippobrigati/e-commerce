@@ -1,4 +1,4 @@
-import { Component, computed, input } from '@angular/core';
+import { Component, computed, input, output } from '@angular/core';
 import { Product as ProductType } from '../../../../core/model/database.types';
 import { CurrencyPipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
@@ -11,6 +11,8 @@ import { RouterLink } from '@angular/router';
 })
 export class Product {
   product = input.required<ProductType>();
+
+  navigate = output<{ id: number, color: string }>();
 
   /**
    * Determine the product color based on its ID,

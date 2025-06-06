@@ -1,5 +1,5 @@
 <div class="col-span-1 h-auto border-b border-r border-gray-200 cursor-pointer"
-    [routerLink]="'details/' + product().id" [queryParams]="{ color: color() }">
+    (click)="navigate.emit({ id: product().id, color: color() })">
     <div class="w-full h-full flex flex-col justify-between items-start p-4">
         <div class="w-full h-full">
             <div class="w-full h-32" [class]="color()"></div>
