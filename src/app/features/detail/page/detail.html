@@ -16,6 +16,10 @@
             <p class="py-8 text-gray-600">
                 {{ product()?.description }}
             </p>
+            <div class="py-4">
+                <span class="monospace-text"><span class="monospace-text" [ngClass]="rateColor()">{{ product()?.rating?.rate }}</span>/5</span> 
+                score with <span class="monospace-text" [ngClass]="reviewColor()">{{ product()?.rating?.count }}</span> 
+                review!</div>
             <p class="py-8 text-2xl monospace-text text-slate-500">
                 {{ product()?.price | currency }}
             </p>

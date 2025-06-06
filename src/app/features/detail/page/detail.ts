@@ -1,4 +1,4 @@
-import { Component, inject, signal } from '@angular/core';
+import { Component, computed, inject, signal } from '@angular/core';
 import { Detail as DetailService } from '../service/detail';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { Product } from '../../../core/model/database.types';
@@ -25,6 +25,36 @@ export class Detail {
   product = signal<Product | null>(null);
   isLoading = signal<boolean>(true);
 
+  rateColor = computed<string>(() => {
+    const rate: number | undefined = this.product()?.rating.rate;
+    if (!rate) {
+      return 'text-red-500';
+    }
+
+    if (rate < 2) {
+      return 'text-yellow-500';
+    } else if (rate < 4) {
+      return 'text-green-500';
+    } else {
+      return 'text-violet-500';
+    }
+  });
+
+    reviewColor = computed<string>(() => {
+    const count: number | undefined = this.product()?.rating.count;
+    if (!count) {
+      return 'text-red-500';
+    }
+
+    if (count < 50) {
+      return 'text-yellow-500';
+    } else if (count < 300) {
+      return 'text-green-500';
+    } else {
+      return 'text-violet-500';
+    }
+  });
+
   constructor() {
     this.fetchProduct();
   }
@@ -34,7 +64,6 @@ export class Detail {
       this.isLoading.set(true);
       
       const id = this.productId();
-
       if (!id) {
         throw new Error(`Missing ID on current route, or error getting it.`);
       }
@@ -45,7 +74,7 @@ export class Detail {
           this.isLoading.set(false);
         },
         error: (err) => {
-          console.error('Error occurred on loading product: ', err);
+          alert(`Error occurred on loading product: ${err}`);
           this.isLoading.set(false);
         }
       });
