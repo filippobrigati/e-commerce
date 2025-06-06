@@ -1,1 +1,33 @@
-<p>login works!</p>
+<div class="w-full md:h-screen px-2 pt-6 md:pt-0 flex justify-center items-center">
+    <div class="w-full max-w-sm flex flex-col gap-4 justify-center items-center" [formGroup]="form">
+        <div class="bg-yellow-50 p-4 w-full">
+            <div class="flex">
+                <div class="flex-1 md:flex md:justify-between">
+                    <p class="text-sm text-yellow-700 leading-6">
+                        If you want to check other user go to:
+                        <a class="underline underline-offset-2" href="https://fakestoreapi.com/users" target="_blank">users list</a>.
+                    </p>
+                </div>
+            </div>
+        </div>
+        <div class="w-full">
+            <label for="username" class="block text-sm/6 font-medium text-gray-900">Username:</label>
+            <div class="mt-2 w-full">
+                <input type="text" name="username" id="username" formControlName="username"
+                    class="block w-full bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-blue-600 sm:text-sm/6">
+            </div>
+        </div>
+        <div class="w-full">
+            <label for="password" class="block text-sm/6 font-medium text-gray-900">Password:</label>
+            <div class="mt-2">
+                <input type="password" name="password" id="password" formControlName="password"
+                    class="block w-full bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 outline-gray-300 placeholder:text-gray-400 focus:outline-2 focus:-outline-offset-2 focus:outline-blue-600 sm:text-sm/6">
+            </div>
+        </div>
+        <button type="button" class="mt-2 w-full bg-blue-500 text-white p-2 disabled:bg-gray-200 disabled:text-black cursor-pointer"
+            [disabled]="form.invalid" (click)="login()">
+            Login
+        </button>
+        <p routerLink="/" class="hover:underline text-blue-500 cursor-pointer">go back</p>
+    </div>
+</div>

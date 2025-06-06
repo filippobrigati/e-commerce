@@ -2,9 +2,19 @@
 @import "tailwindcss";
 
 * {
-    font-family: 'Inter', sans-serif;
+  font-family: "Inter", sans-serif;
 }
 
 .monospace-text {
-    font-family: 'Geist Mono' !important;
+  font-family: "Geist Mono" !important;
+}
+
+::-moz-selection {
+  color: oklch(39.8% 0.07 227.392);
+  background: oklch(95.6% 0.045 203.388);
+}
+
+::selection {
+  color: oklch(39.8% 0.07 227.392);
+  background: oklch(95.6% 0.045 203.388);
 }

@@ -71,9 +71,11 @@
                 </div>
             </div>
         </div>
+        @if (isAuth()) {
         <div class="cursor-pointer w-full border border-gray-200 p-2 flex flex-row hover:bg-gray-200">
             <i-lucide [img]="UserIcon" class="w-5 h-5"></i-lucide>
             <span class="ps-2">Profile</span>
         </div>
+        }
     </div>
 </div>
