@@ -22,8 +22,8 @@ jobs:
       run: npm install
 
     - name: Build Angular App
-      run: npm run build -- --base-href="/e-commerce/"
+      run: ng build --configuration production --base-href 'https://filippobrigati.github.io/e-commerce/'
 
     - name: Deploy to GitHub Pages
       run: |
-        npx angular-cli-ghpages --dir=dist/e-commerce/browser
+        npx angular-cli-ghpages --dir=dist/e-commerce/browser --no-silent
