@@ -1,22 +1,17 @@
 import { Component, inject, signal } from '@angular/core';
-import { LucideAngularModule, User, LogOut } from 'lucide-angular';
-import { Auth as AuthService } from '../../core/service/auth/auth';
 import { Router, Event, NavigationEnd, NavigationError } from '@angular/router';
 import { Filter } from './components/filter/filter';
 import { CartPreview } from './components/cart-preview/cart-preview';
+import { CardInfo } from './components/card-info/card-info/card-info';
 
 @Component({
   selector: 'app-sidebar',
-  imports: [LucideAngularModule, Filter, CartPreview],
+  imports: [Filter, CartPreview, CardInfo],
   templateUrl: './sidebar.html',
   styleUrl: './sidebar.css'
 })
 export class Sidebar {
-  private readonly service = inject(AuthService);
   private readonly router = inject(Router);
-
-  protected readonly UserIcon = User;
-  protected readonly LogoutIcon = LogOut;
 
   currentRoute = signal<string>('');
 
@@ -29,13 +24,5 @@ export class Sidebar {
         console.error(event.error);
       }
     });
-  }
-
-  isAuth(): boolean {
-    return this.service.isLoggedIn();
-  }
-
-  logout() {
-    this.service.logout();
   }
 }

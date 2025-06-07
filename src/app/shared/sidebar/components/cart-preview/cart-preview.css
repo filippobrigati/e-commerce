@@ -1,0 +1,7 @@
+.max-h-custom {
+    max-height: calc(100vh - 5.6rem);
+}
+
+.h-custom {
+    height: calc(100vh - 5.6rem);
+}

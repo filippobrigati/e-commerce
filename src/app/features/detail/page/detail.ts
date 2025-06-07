@@ -64,6 +64,19 @@ export class Detail {
     });
   }
 
+  addToCart(quantity: number) {
+    try {
+      const product = this.product();
+      if (!product) {
+        throw new Error('Missing product');
+      }
+
+      this.service.addToCart(product, quantity);
+    } catch (error) {
+      alert(`Error occurred: ${error instanceof Error ? error.message : error}`);
+    }
+  }
+
   private fetchProduct(id: number) {
     try {
       this.isLoading.set(true);

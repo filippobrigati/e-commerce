@@ -10,7 +10,13 @@
             <i-lucide [img]="PlusIcon" class="h-8 w-8 text-gray-600"></i-lucide>
         </button>
     </div>
-    <button type="button" class="w-2/3 bg-blue-500 text-white px-4 py-3 cursor-pointer">
+    <button type="button"
+        class="w-2/3 bg-blue-500 text-white px-4 py-3 cursor-pointer disabled:bg-gray-200 disabled:text-black disabled:cursor-not-allowed"
+        [disabled]="isDisabled()" (click)="sendToCart()">
+        @if (sending()) {
+        <app-loading-spinner></app-loading-spinner>
+        } @else {
         Add to cart
+        }
     </button>
 </div>

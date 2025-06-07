@@ -26,7 +26,8 @@
             <p class="py-8 text-2xl monospace-text text-slate-500">
                 {{ product()?.price | currency }}
             </p>
-            <app-add-to-cart></app-add-to-cart>
+            <app-add-to-cart
+                (addToCart)="addToCart($event)"></app-add-to-cart>
         </div>
     </div>
     } @placeholder {

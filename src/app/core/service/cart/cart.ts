@@ -30,17 +30,17 @@ export class Cart {
     this.cartSubject.next(this.recalculate(cart.products));
   }
 
-  add(product: Product): void {
+  add(product: Product, quantity: number = 1): void {
     const cart = this.get();
     const existing = cart.products.find(p => p.id === product.id);
 
     let updatedProducts: CartType['products'];
     if (existing) {
       updatedProducts = cart.products.map(p =>
-        p.id === product.id ? { ...p, quantity: p.quantity + 1 } : p
+        p.id === product.id ? { ...p, quantity: p.quantity + quantity } : p
       );
     } else {
-      updatedProducts = [...cart.products, { id: product.id, quantity: 1, product }];
+      updatedProducts = [...cart.products, { id: product.id, quantity: quantity, product }];
     }
 
     this.cartSubject.next(this.recalculate(updatedProducts));
