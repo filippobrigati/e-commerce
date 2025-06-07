@@ -26,4 +26,4 @@ jobs:
 
     - name: Deploy to GitHub Pages
       run: |
-        npx angular-cli-ghpages --dir=dist/e-commerce
+        npx angular-cli-ghpages --dir=dist/e-commerce/browser
