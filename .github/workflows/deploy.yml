@@ -22,7 +22,7 @@ jobs:
       run: npm install
 
     - name: Build Angular App
-      run: npm run build --base-href 'https://filippobrigati.github.io/e-commerce/'
+      run: npm run build
 
     - name: Deploy to GitHub Pages
       run: |
