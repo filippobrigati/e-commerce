@@ -16,8 +16,8 @@
             </div>
         </div>
     </div>
-    @if (isAuth()) {
-    <div class="flex flex-row gap-4 justify-center items-center p-4">
+    <div class="flex flex-row gap-4 justify-center items-center">
+        @if (isAuth()) {
         <div class="cursor-pointer w-full border border-gray-200 p-2 flex flex-row hover:bg-gray-200">
             <i-lucide [img]="UserIcon" class="w-5 h-5"></i-lucide>
             <span class="ps-2">Profile</span>
@@ -26,6 +26,13 @@
             (click)="logout()">
             <i-lucide [img]="LogoutIcon" class="w-5 h-5"></i-lucide>
         </div>
+        } @else {
+        <button type="button"
+            class="cursor-pointer w-full border border-purple-200 text-purple-800 p-2 flex flex-row hover:bg-purple-200"
+            routerLink="login">
+            <i-lucide [img]="LoginIcon" class="w-5 h-5"></i-lucide>
+            <span class="ps-2">Login</span>
+        </button>
+        }
     </div>
-    }
 </div>

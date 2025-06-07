@@ -2,10 +2,11 @@ import { Component, inject, input, output, signal } from '@angular/core';
 import { Product as ProductType } from '../../../../core/model/products';
 import { CurrencyPipe } from '@angular/common';
 import { Store as StoreService } from '../../service/store';
+import { LoadingSpinner } from '../../../../shared/loading-spinner/loading-spinner';
 
 @Component({
   selector: 'app-product',
-  imports: [CurrencyPipe],
+  imports: [CurrencyPipe, LoadingSpinner],
   templateUrl: './product.html',
   styleUrl: './product.css'
 })
