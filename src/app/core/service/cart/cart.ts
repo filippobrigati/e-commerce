@@ -65,6 +65,24 @@ export class Cart {
     this.cartSubject.next(this.recalculate(updatedProducts));
   }
 
+  updateQuantity(productId: number, quantity: number): void {
+    const cart = this.get();
+
+    if (quantity <= 0) {
+      const updatedProducts = cart.products.filter(p => p.id !== productId);
+      this.cartSubject.next(this.recalculate(updatedProducts));
+      return;
+    }
+
+    const existing = cart.products.find(p => p.id === productId);
+    if (existing) {
+      const updatedProducts = cart.products.map(p =>
+        p.id === productId ? { ...p, quantity } : p
+      );
+      this.cartSubject.next(this.recalculate(updatedProducts));
+    }
+  }
+
   remove(productId: number): void {
     const cart = this.get();
     const updatedProducts = cart.products.filter(p => p.id !== productId);

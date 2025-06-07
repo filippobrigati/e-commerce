@@ -28,6 +28,6 @@ export class App {
   }
 
   displayBars(): boolean {
-    return !this.currentRoute().includes('login');
+    return !this.currentRoute().includes('login') && !this.currentRoute().includes('cart');
   }
 }

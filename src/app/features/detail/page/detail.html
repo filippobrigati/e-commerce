@@ -1,7 +1,7 @@
 <div class="w-full" [ngClass]="isLoading() ? 'h-full' : ''">
     @defer (when !isLoading()) {
     <div class="flex flex-row justify-start items-center border-b border-gray-200 py-2 px-4">
-        <div class="flex flex-row text-blue-500 cursor-pointer" routerLink="/">
+        <div class="flex flex-row justify-center items-center text-blue-500 cursor-pointer" routerLink="/">
             <i-lucide [img]="BackIcon" class="w-5 h-5"></i-lucide>
             <span class="ps-1">Go back</span>
         </div>

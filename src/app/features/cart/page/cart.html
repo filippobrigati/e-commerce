@@ -1,1 +1,86 @@
-<p>cart works!</p>
+<div class="w-screen h-screen max-w-5xl mx-auto grid grid-cols-2 p-4">
+    @if (cart().items < 1) {
+        <div class="col-span-2 py-12 flex justify-center items-center">Your cart is empty, <span
+            class="text-blue-500 underline ps-1 cursor-pointer" routerLink="/">go home</span>
+        </div>
+    } @else {
+        <div class="col-span-2 md:col-span-1 border md:border-t md:border-l md:border-b border-gray-200 h-full">
+            <div class="border-b border-gray-200 p-4">
+                <p class="font-semibold text-lg">Products recap</p>
+            </div>
+            <div class="flex flex-col gap-3 max-h-custom-cart overflow-y-auto">
+                @for (item of cart().products; track $index) {
+                    <app-invoice-product
+                        [product]="item.product"
+                        [quantity]="item.quantity"
+                        (removeProduct)="remove($event)"
+                        (updateQuantity)="updateQuantity(item.id, $event)"
+                    ></app-invoice-product>
+                }
+            </div>
+        </div>
+        <div class="col-span-2 md:col-span-1 md:border-r md:border-b border-gray-200">
+            <div class="border md:border-r-0 md:border-l-0 md:border-b border-gray-200">
+                <div class="border-b border-gray-200 p-4">
+                    <p class="font-semibold text-lg">Shipping info</p>
+                </div>
+                <div class="border-b border-dashed border-gray-200">
+                    <div class="flex flex-row justify-between items-center p-4">
+                        <p class="monospace-text text-lg">Nation:</p>
+                        <p class="monospace-text text-lg">Italy</p>
+                    </div>
+                </div>
+                <div class="border-b border-dashed border-gray-200">
+                    <div class="flex flex-row justify-between items-center p-4">
+                        <p class="monospace-text text-lg">Region:</p>
+                        <p class="monospace-text text-lg">Lazio</p>
+                    </div>
+                </div>
+                <div class="border-b border-dashed border-gray-200">
+                    <div class="flex flex-row justify-between items-center p-4">
+                        <p class="monospace-text text-lg">City:</p>
+                        <p class="monospace-text text-lg">Rome</p>
+                    </div>
+                </div>
+                <div class="border-b border-dashed border-gray-200">
+                    <div class="flex flex-row justify-between items-center p-4">
+                        <p class="monospace-text text-lg">CAP:</p>
+                        <p class="monospace-text text-lg">00042</p>
+                    </div>
+                </div>
+                <div class="border-b border-gray-200">
+                    <div class="flex flex-row justify-between items-center p-4">
+                        <p class="monospace-text text-lg">Address:</p>
+                        <p class="monospace-text text-lg">Via del Lavatore, 12</p>
+                    </div>
+                </div>
+                <div class="border-b border-gray-200 p-4">
+                    <p class="font-semibold text-lg">Invoice info</p>
+                </div>
+                <div class="border-b border-dashed border-gray-200">
+                    <div class="flex flex-row justify-between items-center p-4">
+                        <p class="monospace-text text-lg">Amount:</p>
+                        <p class="monospace-text text-lg">{{ cart().amount| currency }}</p>
+                    </div>
+                </div>
+                <div class="border-b border-dashed border-gray-200">
+                    <div class="flex flex-row justify-between items-center p-4">
+                        <p class="monospace-text text-lg">Shipping:</p>
+                        <p class="monospace-text text-lg">{{ SHIPPING_COST | currency }}</p>
+                    </div>
+                </div>
+                <div class="flex flex-row justify-between items-center p-4">
+                    <p class="monospace-text text-lg">Total:</p>
+                    <p class="monospace-text text-lg">{{ total() | currency }}</p>
+                </div>
+            </div>
+            <div class="w-full p-4">
+                <button
+                    type="button"
+                    class="w-full p-3 bg-blue-500 text-white hover:bg-blue-700 cursor-pointer"
+                    (click)="complete()"
+                >Complete order</button>
+            </div>
+        </div>
+    }
+</div>
